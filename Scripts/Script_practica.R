@@ -37,3 +37,11 @@ Bolsa_3
 Indice_Shannon(Bolsa_3)
 Simpson(Bolsa_3)
 Chao1(Bolsa_3)
+
+# Diversidad beta, bolsa 1 y bolsa 3
+
+# Interseccion de 1 y 3 = 1
+
+# Jaccard = 0.1
+# Sorensen = 0.1818
+# Bray-curtis = 0.13333
