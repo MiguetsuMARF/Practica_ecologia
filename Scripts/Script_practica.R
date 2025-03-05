@@ -99,3 +99,12 @@ Chao1(Bolsa_6)
 
 # Bolsa 7 carita feliz
 
+Bolsa_7 <- c(5,3,7,9,4,5,3,2,1,2,5,4)
+nombres_bolsa_7 <- c("azul_medio","azul_claro","azul_fuerte", "verde_fuerte","verde_claro","rojo","rosa_fuerte",
+                     "rosa_medio","rosa_claro", "morado","Naranja","Amarillo")
+
+names(Bolsa_7) <- nombres_bolsa_7
+
+Indice_Shannon(Bolsa_7)
+Simpson(Bolsa_7)
+Chao1(Bolsa_7)
