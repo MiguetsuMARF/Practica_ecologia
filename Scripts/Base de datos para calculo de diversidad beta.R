@@ -19,63 +19,53 @@ Datos <- data.frame(
 
 View(Datos)
 
-Jaccard <- function (data, conjunto_A, conjunto_B){
-  A <- data[[conjunto_A]]
-  B <- data[[conjunto_B]]
-  int <- 0
-  uni <- 0
-  for (i in 1:length(A)){
-    x <- c(A[i],B[i])
-    if (all(x != 0) == TRUE){
-      int <- int + 1
-      uni <- uni + 1
-    } else if (any(x != 0) == TRUE){
-      uni <- uni + 1
-    } 
-  }
-  return(int/uni)
+mj <- matrix(0, nrow = 7, ncol = 7)
+rownames(mj) <- names(Datos)[2:8]
+colnames(mj) <- names(Datos)[2:8]
+
+for (i in 1:7){
+  for (j in i:7){
+    x <- Jaccard(Datos, (names(Datos)[i + 1]), (names(Datos)[j + 1]))
+    mj[j,i] <- x
+    mj[i,j] <- x
+  } 
 }
 
-Sorensen_Dice <- function(data,conjunto_A,conjunto_B){
-  A <- data[[conjunto_A]]
-  B <- data[[conjunto_B]]
-  A2 <- length(A[which(A != 0)])
-  B2 <- length(B[which(B != 0)])
-  int <- 0
-  for (i in 1:length(A)){
-    x <- c(A[i],B[i])
-    if (all(x != 0) == TRUE){
-      int <- int + 1
-    }
-  }
-  return((2*int)/(A2 + B2))
+mj
+
+ms <- matrix(0, nrow = 7, ncol = 7)
+rownames(ms) <- names(Datos)[2:8]
+colnames(ms) <- names(Datos)[2:8]
+
+for (i in 1:7){
+  for (j in i:7){
+    x <- Sorensen_Dice(Datos, (names(Datos)[i + 1]), (names(Datos)[j + 1]))
+    ms[j,i] <- x
+    ms[i,j] <- x
+  } 
 }
 
-Bray_curtis <- function(data, conjunto_A, conjunto_B){
-  A <- data[[conjunto_A]]
-  B <- data[[conjunto_B]]
-  cAB <- 0
-  for (i in 1:length(A)){
-    x <- c(A[i],B[i])
-    if (all(x != 0) == TRUE){
-      if (x[1] >= x[2]){
-      cAB <- cAB + x[2]
-      } else if (x[1] < x[2]){
-      cAB <- cAB + x[1]
-      } 
-    }
-  }
-  return(1 - ((2*cAB)/((sum(A) + sum(B)))))
+ms
+
+mb <- matrix(0, nrow = 7, ncol = 7)
+rownames(mb) <- names(Datos)[2:8]
+colnames(mb) <- names(Datos)[2:8]
+
+for (i in 1:7){
+  for (j in i:7){
+    x <- Bray_curtis(Datos, (names(Datos)[i + 1]), (names(Datos)[j + 1]))
+    mb[j,i] <- x
+    mb[i,j] <- x
+  } 
 }
 
-Datos
-Jaccard(Datos, "Bolsa_4", "Bolsa_3")
-Sorensen_Dice(Datos, "Bolsa_1", "Bolsa_3")
-Bray_curtis(Datos, "Bolsa_2", "Bolsa_3")
+mb
 
-A <- c(1,0,66)
-A2 <- length(A[which(A != 0)])
-A2
-any(a != 0) == TRUE
-sum(A)
-A 
+Resultados_Diversidades_Beta <- list(
+  Jaccard = mj,
+  Sorensen = ms,
+  Bray_curtis = mb
+)
+
+Resultados_Diversidades_Beta
+
