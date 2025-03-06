@@ -209,3 +209,27 @@ R_bolsa_7 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[7,]
 )
 R_bolsa_7
+
+
+#Para hacer las curvas de acumulación creamos una función y usamos
+#tablas de presencia ausencia para las 7 bolsas las cuáles se encuentran
+#en la carpeta "tablas de graficas"
+curvabolsa1<-read.csv(file ="Scripts/Tablas de graficas/Bolsa1.csv")
+curvabolsa2<-read.csv(file ="Scripts/Tablas de graficas/Bolsa2.csv")
+curvabolsa3<-read.csv(file ="Scripts/Tablas de graficas/Bolsa3.csv")
+curvabolsa4<-read.csv(file ="Scripts/Tablas de graficas/Bolsa4.csv")
+curvabolsa5<-read.csv(file ="Scripts/Tablas de graficas/Bolsa5.csv")
+curvabolsa6<-read.csv(file ="Scripts/Tablas de graficas/Bolsa6.csv")
+curvabolsa7<-read.csv(file ="Scripts/Tablas de graficas/Bolsa7.csv")
+
+
+
+#Ahora sí las gráficas, lo seleccionamos de la columna 2 a la 13 para que
+#No tome en cuenta el contador de muestreos como una especie
+as.acumulacion_especies(curvabolsa1[,2:13])
+as.acumulacion_especies(curvabolsa2[,2:13])
+as.acumulacion_especies(curvabolsa3) 
+as.acumulacion_especies(curvabolsa4[,2:13])
+as.acumulacion_especies(curvabolsa5[,2:13])
+as.acumulacion_especies(curvabolsa6[,2:13])
+as.acumulacion_especies(curvabolsa7[,2:13])
