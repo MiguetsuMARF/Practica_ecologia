@@ -97,6 +97,7 @@ Sorensen_Dice <- function(data,conjunto_A,conjunto_B){
 
 #Función para acumulación de especies
 
+
 as.acumulacion_especies<-function(datos) {
   Curva<- specaccum(datos)
   plot(Curva, ci.type="poly", col="blue", lwd=2, ci.lty=0,
