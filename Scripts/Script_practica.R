@@ -90,7 +90,7 @@ R_bolsa_1 <- list(
   Sorensen_Dice = Resultados_Diversidades_Beta$Sorensen[1,],
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[1,]
 )
-R_bolsa_1
+R_bolsa_1 
 
 ## Bolsa 2 hoja ##
 
