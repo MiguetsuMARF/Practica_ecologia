@@ -36,32 +36,41 @@ Datos_graficas[which(Datos_graficas$bolsa == "Bolsa_7"),] -> bolsa_7
 
 
 
-          # Grafica de distribución de fichas por color #
-b1_graph <- ggplot(bolsa_1, aes(x= color, y= n_fichas)) +
+
+# Graficas de distribución de fichas por color y en orden decendente #
+
+b1_graph <- ggplot(bolsa_1, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "darkorange") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b2_graph <- ggplot(bolsa_2, aes(x= color, y= n_fichas)) +
+b2_graph <- ggplot(bolsa_2, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "darkgreen") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b3_graph <- ggplot(bolsa_3, aes(x= color, y= n_fichas)) +
+b3_graph <- ggplot(bolsa_3, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "purple4") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b4_graph <- ggplot(bolsa_4, aes(x= color, y= n_fichas)) +
+b4_graph <- ggplot(bolsa_4, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "darkturquoise") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b5_graph <- ggplot(bolsa_5, aes(x= color, y= n_fichas)) +
+b5_graph <- ggplot(bolsa_5, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "darkblue") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b6_graph <- ggplot(bolsa_6, aes(x= color, y= n_fichas)) +
+b6_graph <- ggplot(bolsa_6, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "deepskyblue") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
-b7_graph <- ggplot(bolsa_7, aes(x= color, y= n_fichas)) +
+b7_graph <- ggplot(bolsa_7, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas)) +
   geom_point(pch = 25, colour = "darkred") + theme_linedraw()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
 
