@@ -6,8 +6,7 @@ library(ggplot2)
 Datos_graficas <- data.frame(
   color = character(),
   bolsa = character(),
-  n_fichas = numeric(),
-  stringsAsFactors = FALSE
+  n_fichas = numeric()
 )
 
 for (i in 2:ncol(Datos)) {
