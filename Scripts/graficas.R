@@ -1,7 +1,8 @@
                             # GRAFICAS #
-
+# Librerias a utilizar
 library(ggplot2)
 
+# Primero hay que reacomodar las bases de datos para que las pueda usar ggplot
 Datos_graficas <- data.frame(
   color = character(),
   bolsa = character(),
@@ -20,9 +21,18 @@ for (i in 2:ncol(Datos)) {
 View(Datos_graficas) # data frame con datos acomodados
 
 
-          # Grafica de cantidad de fichas por bolsa #
-ggplot(Datos_graficas, aes(x= n_fichas, fill =bolsa )) + 
-  geom_density()
+      # Grafica de cantidad de fichas por bolsa en orden decendente #
+
+comunidad <- data.frame(
+  bolsas = c("bolsa_1", "bolsa_2", "bolsa_3", "bolsa_4", "bolsa_5", "bolsa_6", "bolsa_7"),
+  fichas = c(88,66,77,38,68,99,50)
+)
+
+comunidades <- ggplot(comunidad, aes(x = reorder(bolsas, fichas, decreasing = TRUE), y = fichas)) + 
+  geom_point(pch = 25, colour = "brown4") + theme_linedraw()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = NULL)
+
 
 
                # Extrayendo datos de las bolsas #
