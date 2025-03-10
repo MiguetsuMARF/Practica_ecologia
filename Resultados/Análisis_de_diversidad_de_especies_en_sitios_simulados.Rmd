@@ -3,6 +3,9 @@ title: "Practica_diversidades_genomica_rmd"
 author: "Miguel Rodriguez, Ivan Jacobo, Santiago Figueroa"
 date: "2025-03-10"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 ```{r setup, include=FALSE}
@@ -12,19 +15,15 @@ source("../Scripts/Funciones.R") # cargamos las funciones
 
 # Análisis de diversidad de especies en sitios simulados
 
-
-
 ### Los datos registrados en la practica fueron:
 
-Bolsa 1: 88 naranjas
-Bolsa 2: 66 verde fuerte
-Bolsa 3: 4 azul medio, 7 azul claro, 12 azul fuerte, 3 verde fuerte, 1 verde claro, 12 rojo, 12 rosa fuerte, 2 rosa claro, 13 morado, 11 naranja.
+Bolsa 1: 88 naranjas Bolsa 2: 66 verde fuerte Bolsa 3: 4 azul medio, 7 azul claro, 12 azul fuerte, 3 verde fuerte, 1 verde claro, 12 rojo, 12 rosa fuerte, 2 rosa claro, 13 morado, 11 naranja.
 Bolsa 4: 14 azul medio, 10 azul claro, 3 azul fuerte, 1 verde fuerte, 1 verde claro, 2 rojo, 3 rosa fuerte, 2 rosa medio, 2 rosa claro.
 Bolsa 5: 4 azul medio, 4 azul claro, 18 azul fuerte, 10 verde fuerte, 15 verde claro, 2 rojo, 5 rosa fuerte, 1 rosa medio, 3 rosa claro, 1 morado, 2 naranja, 3 amarillo.
 Bolsa 6: 4 azul medio, 6 azul claro, 10 azul fuerte, 3 verde fuerte, 7 verde claro, 10 rojo, 9 rosa fuerte, 10 rosa medio, 10 rosa claro, 10 morado, 10 naranja, 10 amarillo.
 Bolsa 7: 5 azul medio, 3 azul claro, 7 azul fuerte, 9 verde fuerte, 4 verde claro, 5 rojo, 3 rosa fuerte, 2 rosa medio, 1 rosa claro, 2 morado, 5 naranja, 4 amarillo.
 
-Por tanto se van a realizar el calculo de diversidad alfa por medio de: 
+Por tanto se van a realizar el calculo de diversidad alfa por medio de:
 
 ![indice de diversidad de Shannon](https://www.tiloom.com/wp-content/uploads/2021/07/bitmap.png)
 
@@ -34,31 +33,36 @@ Ademas de los indices de Pielou y el indice de Chao.
 
 Finalmente se va a realizar el calculo de las diversidades beta entre cada bolsa.
 
-
 ### Cuestionario
 
-1. ¿Cómo varían los valores de los índices entre los sitios? ¿Qué diferencias resaltan?
-2. ¿Cuál índice es más sensible a especies raras?
-3. ¿Por qué el índice de Pielou nos da información sobre la equitatividad de la comunidad?
-4. ¿Cuál sitio parece tener mayor diversidad según la curva de rarefacción? ¿Por qué?
-5. ¿Cómo afecta el tamaño de la muestra en la forma de la curva?
+1.  ¿Cómo varían los valores de los índices entre los sitios? ¿Qué diferencias resaltan?
+2.  ¿Cuál índice es más sensible a especies raras?
+3.  ¿Por qué el índice de Pielou nos da información sobre la equitatividad de la comunidad?
+4.  ¿Cuál sitio parece tener mayor diversidad según la curva de rarefacción? ¿Por qué?
+5.  ¿Cómo afecta el tamaño de la muestra en la forma de la curva?
 
-Al ver las curvas de las bolsas que solo tenían una especie, podemos ver que siempre es una línea recta. En las que son varias, dependiendo del tamaño de la muestra, la curva varía, y se extiende más conforme nuestra muestra es mayor. Mientras el número de especies muestreadas crece, podemos ver que se reduce la pendiente de la curva significativamente, hasta acercarse a una asíntota (el número total de especies) donde la pendiente terminará por ser 0. 
+Al ver las curvas de las bolsas que solo tenían una especie, podemos ver que siempre es una línea recta.
+En las que son varias, dependiendo del tamaño de la muestra, la curva varía, y se extiende más conforme nuestra muestra es mayor.
+Mientras el número de especies muestreadas crece, podemos ver que se reduce la pendiente de la curva significativamente, hasta acercarse a una asíntota (el número total de especies) donde la pendiente terminará por ser 0.
 
+6.  ¿Cuál de estos índices es más sensible a la diferencia en abundancias?
 
-6. ¿Cuál de estos índices es más sensible a la diferencia en abundancias?
+Comenzando con la diversidad alfa, encontramos que los índices de Shannon y de Simpson son bastante sensibles a las diferencias de abundancias, pues en su cálculo ambos toman en cuenta el número de individuos en total y por cada especie.
+Por otro lado, en las diversidades beta, el índice de Bray Curtis parece ser el más sensible a la diferencia en abundancia por tomar en cuenta la suma de abundancias menores de las especies compartidas, además del total de individuos.
 
-Comenzando con la diversidad alfa, encontramos que los índices de Shannon y de Simpson son bastante sensibles a las diferencias de abundancias, pues en su cálculo ambos toman en cuenta el número de individuos en total y por cada especie. Por otro lado, en las diversidades beta, el índice de Bray Curtis parece ser el más sensible a la diferencia en abundancia por tomar en cuenta la suma de abundancias menores de las especies compartidas, además del total de individuos. 
+7.  ¿Qué interpretación ecológica tienen las diferencias entre sitios?
 
-7. ¿Qué interpretación ecológica tienen las diferencias entre sitios?
+Una diferencia en el número de especies nos habla directamente de una diferencia de riqueza entre dos sitios.
+Por el contrario, una diferencia en las abundancias y en los índices que miden la diversidad de los sitios y entre sitios, nos puede hablar de la existencia de especies dominantes, de cadenas tróficas diversas y de las condiciones bióticas y abióticas del área en la que se está muestreando, como lo puede ser la disponibilidad de nutrientes, el contacto con otras áreas, entre otras.
 
-Una diferencia en el número de especies nos habla directamente de una diferencia de riqueza entre dos sitios. Por el contrario, una diferencia en las abundancias y en los índices que miden la diversidad de los sitios y entre sitios, nos puede hablar de la existencia de especies dominantes, de cadenas tróficas diversas y de las condiciones bióticas y abióticas del área en la que se está muestreando, como lo puede ser la disponibilidad de nutrientes, el contacto con otras áreas, entre otras.
+8.  ¿Cómo interpretas la forma de las curvas de abundancia?
 
-8. ¿Cómo interpretas la forma de las curvas de abundancia?
+La forma de las curvas depende tanto de la riqueza de especies como de la abundancia de las mismas.
+Si tenemos una población con una distribución de abundancias homogénea, no veremos la misma curva que en una población con la misma riqueza, pero con un alto número de singletons y doubletons.
+En dicho caso, posiblemente, la segunda curva se estabilice mucho más rápido y tomará un esfuerzo de muestreo mayor el poder representar correctamente a los individuos de la población.
+En cuanto a la riqueza, una población con un menor riqueza podrá requerir un menor muestreo para encontrar a dichas especies, por lo cuál su curva disminuirá en pendiente para alcanzar la asíntota rápidamente.
 
-La forma de las curvas depende tanto de la riqueza de especies como de la abundancia de las mismas. Si tenemos una población con una distribución de abundancias homogénea, no veremos la misma curva que en una población con la misma riqueza, pero con un alto número de singletons y doubletons. En dicho caso, posiblemente, la segunda curva se estabilice mucho más rápido y tomará un esfuerzo de muestreo mayor el poder representar correctamente a los individuos de la población. En cuanto a la riqueza, una población con un menor riqueza podrá requerir un menor muestreo para encontrar a dichas especies, por lo cuál su curva disminuirá en pendiente para alcanzar la asíntota rápidamente. 
-
-9. ¿Qué implicaciones tienen para la dominancia de especies?
+9.  ¿Qué implicaciones tienen para la dominancia de especies?
 10. ¿Qué patrones generales observaste en la diversidad entre los sitios?
 11. ¿Cuál índice te pareció más útil y por qué?
 12. ¿Cómo podrías aplicar este análisis en estudios ecológicos reales?
@@ -241,6 +245,7 @@ Resultados_Diversidades_Beta
 
 ## Ahora si podemos construir los resultados de diversidad alfa y beta de cada bolsa.
 ```
+
 ### Calculando indices para cada bolsa y sus combinaciones
 
 bolsa 1
@@ -262,6 +267,7 @@ R_bolsa_1 <- list(
 )
 R_bolsa_1 
 ```
+
 Bolsa 2
 
 ```{r}
@@ -409,3 +415,44 @@ R_bolsa_7 <- list(
 R_bolsa_7
 ```
 
+### Curva de acumulación de especies
+
+Primero, fue necesario crear las bases de datos en csv en las cuales se registraron los resultados de los muestreos con las bolsas de las fichitas.
+las tablas se encuentran en la carpeta de "Tablas de gráficas".
+
+Se leyeron las tablas y se les asignó nombre
+
+```{r}
+curvabolsa1<-read.csv(file ="Scripts/Tablas de graficas/Bolsa1.csv")
+curvabolsa2<-read.csv(file ="Scripts/Tablas de graficas/Bolsa2.csv")
+curvabolsa3<-read.csv(file ="Scripts/Tablas de graficas/Bolsa3.csv")
+curvabolsa4<-read.csv(file ="Scripts/Tablas de graficas/Bolsa4.csv")
+curvabolsa5<-read.csv(file ="Scripts/Tablas de graficas/Bolsa5.csv")
+curvabolsa6<-read.csv(file ="Scripts/Tablas de graficas/Bolsa6.csv")
+curvabolsa7<-read.csv(file ="Scripts/Tablas de graficas/Bolsa7.csv")
+
+```
+
+Posteriormente utilizamos la siguiente función:
+
+```{r}
+as.acumulacion_especies<-function(datos) {
+  Curva<- specaccum(datos)
+  plot(Curva, ci.type="poly", col="blue", lwd=2, ci.lty=0,
+       ci.col="lightblue", xlab = "Muestreo", ylab = "Especies")
+}
+```
+
+Y obtuvimos las siguientes gráficas
+
+```{r}
+#Ahora sí las gráficas, lo seleccionamos de la columna 2 a la 13 para que
+#No tome en cuenta el contador de muestreos como una especie
+as.acumulacion_especies(curvabolsa1[,2:13])
+as.acumulacion_especies(curvabolsa2[,2:13])
+as.acumulacion_especies(curvabolsa3) 
+as.acumulacion_especies(curvabolsa4[,2:13])
+as.acumulacion_especies(curvabolsa5[,2:13])
+as.acumulacion_especies(curvabolsa6[,2:13])
+as.acumulacion_especies(curvabolsa7[,2:13])
+```
