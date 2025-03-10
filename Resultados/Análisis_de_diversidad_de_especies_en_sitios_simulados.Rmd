@@ -546,3 +546,17 @@ as.acumulacion_especies(curvabolsa7[,2:13])
 
 ```
 
+
+### Lo que hizo cada quién 
+-> Ivan: Graficas de abundancia para cada bolsa y entre bolsas (Hay un script dedicado a ello).
+
+-> Miguel:
+
+-> Santiago:
+
+-> Los 3: 
+  Generación de Scripts y Rmark down,
+  Repuestas del cuestionario,
+  Generación y registro de datos
+
+
