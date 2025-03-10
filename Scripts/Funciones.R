@@ -125,3 +125,4 @@ as.acumulacion_especies<-function(datos) {
 # Librerias
 
 library(ggplot2)
+library(vegan)
