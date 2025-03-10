@@ -1,4 +1,5 @@
                             # GRAFICAS #
+
 # Librerias a utilizar
 library(ggplot2)
 
@@ -114,4 +115,6 @@ b7_graph <- ggplot(b_7, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   geom_point(pch = 25, colour = "darkred") + theme_linedraw()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(x = NULL)
+
+
 

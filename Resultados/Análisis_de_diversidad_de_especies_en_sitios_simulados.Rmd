@@ -63,9 +63,16 @@ En dicho caso, posiblemente, la segunda curva se estabilice mucho más rápido y
 En cuanto a la riqueza, una población con un menor riqueza podrá requerir un menor muestreo para encontrar a dichas especies, por lo cuál su curva disminuirá en pendiente para alcanzar la asíntota rápidamente.
 
 9.  ¿Qué implicaciones tienen para la dominancia de especies?
+Nos permiten identificar y contrastar el número de individuos por especie en una región dada, permitiendo identificar fácilmente si hay una especie dominante en un sitio determinado. Es así que brindan un complemento visual a los índices de diversidad alfa y beta, favoreciendo de manera particular a los que no toman en cuenta el número de individuos por especie para dictaminar su diversidad.
+
 10. ¿Qué patrones generales observaste en la diversidad entre los sitios?
+Con excepción de aquellos ejemplos en los que había una sola especie, la diversidad es alta, ya que considerando el índice de pielou, siempre es mayor a 0.8 dentro de un rango que va de cero a uno.
+
 11. ¿Cuál índice te pareció más útil y por qué?
+El de pielou, puesto que toma en cuenta la riqueza y la abundancia de especies en una región dada, y el resultado que arroja se encuentra dentro de cero y uno, de manera que es más fácil comprender si la diversidad es alta o baja en contraste con el índice de shannon, el cual de igual manera toma en cuenta riqueza y abundancia, sin embargo para saber si la diversidad es alta o baja hay que realizar una operación extra.
+
 12. ¿Cómo podrías aplicar este análisis en estudios ecológicos reales?
+Sustituyendo las fichas por elementos de estudio y cambiando las bolsas por ubicaciones geográficas, de esta manera podríamos hacer análisis de diversidad alfa para cada región, y posteriormente contrastar con otra mediante análisis de diversidad beta. Incluso a nivel de toma de muestra nuestro script es útil, ya que se generó una función para determinar cuándo es que el muestreo es significativo en una región dada.
 
 ### Funciones para calculo de diversidades
 
