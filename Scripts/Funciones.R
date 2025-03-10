@@ -121,3 +121,7 @@ as.acumulacion_especies<-function(datos) {
        ci.col="lightblue", xlab = "Muestreo", ylab = "Especies")
 }
 
+
+# Librerias
+
+library(ggplot2)

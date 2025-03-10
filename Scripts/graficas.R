@@ -18,6 +18,10 @@ for (i in 2:ncol(Datos)) {
 }
 
 View(Datos_graficas) # data frame con datos acomodados
+write.csv(Datos_graficas, file ="Scripts/Tablas de graficas/Datos_graficas.csv", row.names = FALSE)
+Datos_graficas<-read.csv(file ="Scripts/Tablas de graficas/Datos_graficas.csv")
+
+
 
 
       # Grafica de cantidad de fichas por bolsa en orden decendente #
