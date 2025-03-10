@@ -48,7 +48,8 @@ comunidades <- ggplot(comunidad, aes(x = reorder(bolsas, fichas, decreasing = TR
                # Extrayendo datos de las bolsas #
 Datos_graficas[which(Datos_graficas$bolsa == "Bolsa_1"),] -> b_1
 write.csv(b_1, file ="Scripts/Tablas de graficas/b_1.csv", row.names = FALSE)
-b_1<-read.csv(file ="Scripts/Tablas de graficas/b_1.csv")
+b_1 <-read.csv(file ="Scripts/Tablas de graficas/b_1.csv")
+
 
 Datos_graficas[which(Datos_graficas$bolsa == "Bolsa_2"),] -> b_2
 write.csv(b_2, file ="Scripts/Tablas de graficas/b_2.csv", row.names = FALSE)
