@@ -253,6 +253,17 @@ Resultados_Diversidades_Beta
 ```{r}
 comunidad<-read.csv(file ="../Scripts/Tablas de graficas/comunidad.csv")
 
+curvabolsa1<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa1.csv")
+curvabolsa2<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa2.csv")
+curvabolsa3<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa3.csv")
+curvabolsa4<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa4.csv")
+curvabolsa5<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa5.csv")
+curvabolsa6<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa6.csv")
+curvabolsa7<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa7.csv")
+
+```
+
+
 comunidades <- ggplot(comunidad, aes(x = reorder(bolsas, fichas, decreasing = TRUE), y = fichas)) + 
   geom_point(pch = 25, colour = "brown4") + theme_linedraw()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
@@ -261,7 +272,7 @@ comunidades <- ggplot(comunidad, aes(x = reorder(bolsas, fichas, decreasing = TR
 comunidades
 ```
 
-bolsa 1
+Bolsa 1
 
 ```{r}
 
@@ -288,6 +299,11 @@ b1_graph <- ggplot(b_1, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(x = NULL)
 b1_graph
+
+
+#Gráfica de acumulación de especies 
+as.acumulacion_especies(curvabolsa1[,2:13])
+
 ```
 
 Bolsa 2
@@ -317,6 +333,11 @@ b2_graph <- ggplot(b_2, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(x = NULL)
 b2_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa2[,2:13])
+
 ```
 
 Bolsa 3
@@ -352,6 +373,12 @@ b3_graph <- ggplot(b_3, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   labs(x = NULL)
 
 b3_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa3) 
+
+
 ```
 
 Bolsa 4
@@ -391,6 +418,12 @@ b4_graph <- ggplot(b_4, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   labs(x = NULL)
 
 b4_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa4[,2:13])
+
+
 ```
 
 Bolsa 5
@@ -426,6 +459,12 @@ b5_graph <- ggplot(b_5, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   labs(x = NULL)
 
 b5_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa4[,2:13])
+
+
 ```
 
 Bolsa 6
@@ -460,6 +499,12 @@ b6_graph <- ggplot(b_6, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   labs(x = NULL)
 
 b6_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa6[,2:13])
+
+
 ```
 
 Bolsa 7
@@ -494,6 +539,12 @@ b7_graph <- ggplot(b_7, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= 
   labs(x = NULL)
 
 b7_graph
+
+#Gráfica de acumulación de especies
+
+as.acumulacion_especies(curvabolsa7[,2:13])
+
+
 ```
 
 ### Curva de acumulación de especies
@@ -512,28 +563,4 @@ curvabolsa5<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa5.csv")
 curvabolsa6<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa6.csv")
 curvabolsa7<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa7.csv")
 
-```
-
-Posteriormente utilizamos la siguiente función:
-
-```{r}
-as.acumulacion_especies<-function(datos) {
-  Curva<- specaccum(datos)
-  plot(Curva, ci.type="poly", col="blue", lwd=2, ci.lty=0,
-       ci.col="lightblue", xlab = "Muestreo", ylab = "Especies")
-}
-```
-
-Y obtuvimos las siguientes gráficas
-
-```{r}
-#Ahora sí las gráficas, lo seleccionamos de la columna 2 a la 13 para que
-#No tome en cuenta el contador de muestreos como una especie
-as.acumulacion_especies(curvabolsa1[,2:13])
-as.acumulacion_especies(curvabolsa2[,2:13])
-as.acumulacion_especies(curvabolsa3) 
-as.acumulacion_especies(curvabolsa4[,2:13])
-as.acumulacion_especies(curvabolsa5[,2:13])
-as.acumulacion_especies(curvabolsa6[,2:13])
-as.acumulacion_especies(curvabolsa7[,2:13])
 ```
