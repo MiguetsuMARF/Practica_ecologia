@@ -553,10 +553,15 @@ as.acumulacion_especies(curvabolsa7[,2:13])
 -> Miguel:
 
 -> Santiago:
-
+  Generación de código, funcion y bases de datos para las curvas de acumulación de especies y sus gráficas
 -> Los 3: 
   Generación de Scripts y Rmark down,
   Repuestas del cuestionario,
   Generación y registro de datos
 
+
+
+###Referencias
+
+Óscar Ramírez - Curvas de Acumulación con R. (n.d.). RPubs https://rpubs.com/osoramirez/300134
 
