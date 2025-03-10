@@ -1,13 +1,168 @@
+---
+title: "Practica_diversidades_genomica_rmd"
+author: "Miguel Rodriguez, Ivan Jacobo, Santiago Figueroa"
+date: "2025-03-10"
+output: html_document
+---
 
-#### PRACTICA ESTIMACION DE DIVERSIDAD ALFA Y BETA DE BOLSAS CON FICHAS ####
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../Scripts/Funciones.R") # cargamos las funciones 
+```
 
-## Las funciones para estimar las diversidades se encuentran en el script "Funciones.R", lo debemos cargar para realizar
-# la practica
+# Análisis de diversidad de especies en sitios simulados
 
-source("Scripts/Funciones.R")
 
-## Para empezar debemos registrar los datos en una base de datos, tenemos un total de 12 colores y 7 bolsas.
 
+### Los datos registrados en la practica fueron:
+
+Bolsa 1: 88 naranjas
+Bolsa 2: 66 verde fuerte
+Bolsa 3: 4 azul medio, 7 azul claro, 12 azul fuerte, 3 verde fuerte, 1 verde claro, 12 rojo, 12 rosa fuerte, 2 rosa claro, 13 morado, 11 naranja.
+Bolsa 4: 14 azul medio, 10 azul claro, 3 azul fuerte, 1 verde fuerte, 1 verde claro, 2 rojo, 3 rosa fuerte, 2 rosa medio, 2 rosa claro.
+Bolsa 5: 4 azul medio, 4 azul claro, 18 azul fuerte, 10 verde fuerte, 15 verde claro, 2 rojo, 5 rosa fuerte, 1 rosa medio, 3 rosa claro, 1 morado, 2 naranja, 3 amarillo.
+Bolsa 6: 4 azul medio, 6 azul claro, 10 azul fuerte, 3 verde fuerte, 7 verde claro, 10 rojo, 9 rosa fuerte, 10 rosa medio, 10 rosa claro, 10 morado, 10 naranja, 10 amarillo.
+Bolsa 7: 5 azul medio, 3 azul claro, 7 azul fuerte, 9 verde fuerte, 4 verde claro, 5 rojo, 3 rosa fuerte, 2 rosa medio, 1 rosa claro, 2 morado, 5 naranja, 4 amarillo.
+
+Por tanto se van a realizar el calculo de diversidad alfa por medio de: 
+
+![indice de diversidad de Shannon](https://www.tiloom.com/wp-content/uploads/2021/07/bitmap.png)
+
+![indice de diversidad de Simpson](https://www.lifeder.com/wp-content/uploads/2018/03/indice-de-Simpson-lifeder-formula.jpg)
+
+Ademas de los indices de Pielou y el indice de Chao.
+
+Finalmente se va a realizar el calculo de las diversidades beta entre cada bolsa.
+
+
+### Cuestionario
+
+1. ¿Cómo varían los valores de los índices entre los sitios? ¿Qué diferencias resaltan?
+2. ¿Cuál índice es más sensible a especies raras?
+3. ¿Por qué el índice de Pielou nos da información sobre la equitatividad de la comunidad?
+4. ¿Cuál sitio parece tener mayor diversidad según la curva de rarefacción? ¿Por qué?
+5. ¿Cómo afecta el tamaño de la muestra en la forma de la curva?
+6. ¿Cuál de estos índices es más sensible a la diferencia en abundancias?
+7. ¿Qué interpretación ecológica tienen las diferencias entre sitios?
+8. ¿Cómo interpretas la forma de las curvas de abundancia?
+9. ¿Qué implicaciones tienen para la dominancia de especies?
+10. ¿Qué patrones generales observaste en la diversidad entre los sitios?
+11. ¿Cuál índice te pareció más útil y por qué?
+12. ¿Cómo podrías aplicar este análisis en estudios ecológicos reales?
+
+### Funciones para calculo de diversidades
+
+```{r}
+
+# Funcion para calculo de Chao 1
+
+Chao1 <- function(Abundancias){
+  x <- length(Abundancias)
+  s <- 0
+  d <- 0
+  for (i in 1:length(Abundancias)){
+    if (Abundancias[i] == 1){
+      s <- s + 1
+    } else if (Abundancias[i] == 2){
+      d <- d + 1
+    }
+  }
+  if (d == 0){
+    C <- x
+  } else {
+    C <- x + ((s*s)/(2*d))
+  }
+  return(C)
+}
+
+# Funciones para calcular indice de Simpson y sus variaciones.
+
+Simpson <- function(Abundancias){
+  x <- c()
+  for(i in 1:length(Abundancias)){
+    x <- c(x,(Abundancias[i]*(Abundancias[i]-1))/(sum(Abundancias)*(sum(Abundancias)-1)))
+  }
+  return(sum(x))
+}
+
+Simpson_2 <- function(Abundancias){
+  x <- c()
+  for(i in 1:length(Abundancias)){
+    x <- c(x,(Abundancias[i]/sum(Abundancias))*(Abundancias[i]/sum(Abundancias)))
+  }
+  return(sum(x))
+}
+
+Simpson_Div <- function(Abundancias){
+  return(1 - Simpson(Abundancias))
+}
+
+Simpson_Inv <- function(Abundancias){
+  return(1/Simpson(Abundancias))
+}
+
+# Funcion para calculo de indice de Shannon e indice de Pielou
+
+Indice_Shannon <- function(x){
+  N <- length(x)
+  Total <- sum(x)
+  Shannon <- c()
+  for (i in 1:N){
+    y <- (x[i]/Total)*log((x[i]/Total))
+    Shannon <- c(Shannon, y)
+  }
+  SShannon <- (-1)*(sum(Shannon))
+  Max <- log(N)
+  Pielou <- SShannon/Max
+  Resultados <- list(
+    Riqueza = N,
+    Total_de_individuos = Total,
+    Indice_Shannon = SShannon,
+    Maximo = Max,
+    Indice_Pielou = Pielou
+  )
+  return(Resultados)
+}
+
+# Funciones para el calculo de diversidad beta, se necesita una base de datos que contenga las frecuencias de cada especie y su presencia y ausencia.
+
+Jaccard <- function (data, conjunto_A, conjunto_B){
+  A <- data[[conjunto_A]]
+  B <- data[[conjunto_B]]
+  int <- 0
+  uni <- 0
+  for (i in 1:length(A)){
+    x <- c(A[i],B[i])
+    if (all(x != 0) == TRUE){
+      int <- int + 1
+      uni <- uni + 1
+    } else if (any(x != 0) == TRUE){
+      uni <- uni + 1
+    } 
+  }
+  return(int/uni)
+}
+
+Sorensen_Dice <- function(data,conjunto_A,conjunto_B){
+  A <- data[[conjunto_A]]
+  B <- data[[conjunto_B]]
+  A2 <- length(A[which(A != 0)])
+  B2 <- length(B[which(B != 0)])
+  int <- 0
+  for (i in 1:length(A)){
+    x <- c(A[i],B[i])
+    if (all(x != 0) == TRUE){
+      int <- int + 1
+    }
+  }
+  return((2*int)/(A2 + B2))
+}
+
+```
+
+Posteriormente se van a registrar los datos en una base de datos
+
+```{r}
 Datos <- data.frame(
   Color = c("azul_medio","azul_claro","azul_fuerte", "verde_fuerte","verde_claro","rojo","rosa_fuerte",
             "rosa_medio","rosa_claro", "morado","Naranja","Amarillo"),
@@ -20,10 +175,11 @@ Datos <- data.frame(
   Bolsa_7 = c(5,3,7,9,4,5,3,2,1,2,5,4)
 )
 
-View(Datos)
+Datos
 
-write.csv(Datos, "Resultados/Datos.csv")
+```
 
+```{r}
 ## Posteriormente necesitamos una lista de matrices que contenga el resultado de las estimaciones beta.
 
 mj <- matrix(0, nrow = 7, ncol = 7)
@@ -38,8 +194,6 @@ for (i in 1:7){
   } 
 }
 
-mj
-
 ms <- matrix(0, nrow = 7, ncol = 7)
 rownames(ms) <- names(Datos)[2:8]
 colnames(ms) <- names(Datos)[2:8]
@@ -51,8 +205,6 @@ for (i in 1:7){
     ms[i,j] <- x
   } 
 }
-
-ms
 
 mb <- matrix(0, nrow = 7, ncol = 7)
 rownames(mb) <- names(Datos)[2:8]
@@ -66,8 +218,6 @@ for (i in 1:7){
   } 
 }
 
-mb
-
 Resultados_Diversidades_Beta <- list(
   Jaccard = mj,
   Sorensen = ms,
@@ -77,8 +227,13 @@ Resultados_Diversidades_Beta <- list(
 Resultados_Diversidades_Beta
 
 ## Ahora si podemos construir los resultados de diversidad alfa y beta de cada bolsa.
+```
+### Calculando indices para cada bolsa y sus combinaciones
 
-#--------------------------------------------------------------------------------------------------------------------------------#
+bolsa 1
+
+```{r}
+
 ## Bolsa 1 ##
 
 # Naranjas, 88
@@ -93,6 +248,10 @@ R_bolsa_1 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[1,]
 )
 R_bolsa_1 
+```
+Bolsa 2
+
+```{r}
 
 ## Bolsa 2 hoja ##
 
@@ -108,6 +267,11 @@ R_bolsa_2 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[2,]
 )
 R_bolsa_2
+```
+
+Bolsa 3
+
+```{r}
 
 ## Bolsa 3 (3 puntitos) ##
 # total = 77
@@ -128,6 +292,11 @@ R_bolsa_3 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[3,]
 )
 R_bolsa_3
+```
+
+Bolsa 4
+
+```{r}
 
 ## Bolsa 4 alfa ##
 
@@ -152,7 +321,11 @@ R_bolsa_4 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[4,]
 )
 R_bolsa_4
+```
 
+Bolsa 5
+
+```{r}
 
 ##  Bolsa 5 luna, estrella, pi, oso ##
 
@@ -173,6 +346,11 @@ R_bolsa_5 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[5,]
 )
 R_bolsa_5
+```
+
+Bolsa 6
+
+```{r}
 
 ##  Bolsa 6 luna grande ##
 
@@ -192,6 +370,11 @@ R_bolsa_6 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[6,]
 )
 R_bolsa_6
+```
+
+Bolsa 7
+
+```{r}
 
 ##  Bolsa 7 carita feliz ##
 
@@ -211,27 +394,5 @@ R_bolsa_7 <- list(
   Bray_curtis = Resultados_Diversidades_Beta$Bray_curtis[7,]
 )
 R_bolsa_7
+```
 
-
-#Para hacer las curvas de acumulación creamos una función y usamos
-#tablas de presencia ausencia para las 7 bolsas las cuáles se encuentran
-#en la carpeta "tablas de graficas"
-curvabolsa1<-read.csv(file ="Scripts/Tablas de graficas/Bolsa1.csv")
-curvabolsa2<-read.csv(file ="Scripts/Tablas de graficas/Bolsa2.csv")
-curvabolsa3<-read.csv(file ="Scripts/Tablas de graficas/Bolsa3.csv")
-curvabolsa4<-read.csv(file ="Scripts/Tablas de graficas/Bolsa4.csv")
-curvabolsa5<-read.csv(file ="Scripts/Tablas de graficas/Bolsa5.csv")
-curvabolsa6<-read.csv(file ="Scripts/Tablas de graficas/Bolsa6.csv")
-curvabolsa7<-read.csv(file ="Scripts/Tablas de graficas/Bolsa7.csv")
-
-
-
-#Ahora sí las gráficas, lo seleccionamos de la columna 2 a la 13 para que
-#No tome en cuenta el contador de muestreos como una especie
-as.acumulacion_especies(curvabolsa1[,2:13])
-as.acumulacion_especies(curvabolsa2[,2:13])
-as.acumulacion_especies(curvabolsa3) 
-as.acumulacion_especies(curvabolsa4[,2:13])
-as.acumulacion_especies(curvabolsa5[,2:13])
-as.acumulacion_especies(curvabolsa6[,2:13])
-as.acumulacion_especies(curvabolsa7[,2:13])
