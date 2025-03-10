@@ -94,6 +94,23 @@ Sorensen_Dice <- function(data,conjunto_A,conjunto_B){
   return((2*int)/(A2 + B2))
 }
 
+Bray_curtis <- function(data,conjunto_A,conjunto_B){
+  A <- data[[conjunto_A]]
+  B <- data[[conjunto_B]]
+  cAB <- 0
+  for (i in 1:length(A)){
+    x <- c(A[i],B[i])
+    if (all(x != 0) == TRUE){
+      if ( x[1] >= x[2]){
+        cAB <- cAB + x[2]
+      } else if (x[1] < x[2]){
+        cAB <- cAB + x[1]
+      }
+    }
+  }
+  return(1 - ((2*cAB)/(sum(A) + sum(B))))
+}
+
 
 #Función para acumulación de especies
 
