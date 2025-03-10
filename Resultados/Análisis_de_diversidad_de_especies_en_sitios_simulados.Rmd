@@ -355,7 +355,7 @@ R_bolsa_3
 b_3 <- read.csv(file = "../Scripts/Tablas de graficas/b_3.csv")
 
 b3_graph <- ggplot(b_3, aes(x = reorder(color, n_fichas, decreasing = TRUE), y= n_fichas, group = 1)) +
-  geom_point(pch = 25, colour = "purple4") + theme_linedraw()+ geom_line(colorur= "purple4") +
+  geom_point(pch = 25, colour = "purple4") + theme_linedraw()+ geom_line(colour= "purple4") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(x = NULL)
 
