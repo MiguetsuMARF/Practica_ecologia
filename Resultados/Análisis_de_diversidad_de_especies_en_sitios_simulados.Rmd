@@ -504,13 +504,13 @@ las tablas se encuentran en la carpeta de "Tablas de gráficas".
 Se leyeron las tablas y se les asignó nombre
 
 ```{r}
-curvabolsa1<-read.csv(file ="Scripts/Tablas de graficas/Bolsa1.csv")
-curvabolsa2<-read.csv(file ="Scripts/Tablas de graficas/Bolsa2.csv")
-curvabolsa3<-read.csv(file ="Scripts/Tablas de graficas/Bolsa3.csv")
-curvabolsa4<-read.csv(file ="Scripts/Tablas de graficas/Bolsa4.csv")
-curvabolsa5<-read.csv(file ="Scripts/Tablas de graficas/Bolsa5.csv")
-curvabolsa6<-read.csv(file ="Scripts/Tablas de graficas/Bolsa6.csv")
-curvabolsa7<-read.csv(file ="Scripts/Tablas de graficas/Bolsa7.csv")
+curvabolsa1<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa1.csv")
+curvabolsa2<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa2.csv")
+curvabolsa3<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa3.csv")
+curvabolsa4<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa4.csv")
+curvabolsa5<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa5.csv")
+curvabolsa6<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa6.csv")
+curvabolsa7<-read.csv(file ="../Scripts/Tablas de graficas/Bolsa7.csv")
 
 ```
 
